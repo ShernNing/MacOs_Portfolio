@@ -10,32 +10,55 @@ const useWindowStore = create(
     openWindow: (windowKey, data = null) => {
       set((state) => {
         const win = state.windows[windowKey];
-        if (win) {
-          win.isOpen = true;
-          win.data = data ?? win.data;
-          win.zIndex = state.nextZIndex;
-          state.nextZIndex++;
-        }
+        if (!win) return;
+
+        win.isOpen = true;
+        win.zIndex = state.nextZIndex;
+        win.data = data ?? win.data;
+        state.nextZIndex++;
       });
     },
 
     closeWindow: (windowKey) => {
       set((state) => {
         const win = state.windows[windowKey];
-        if (win) {
-          win.isOpen = false;
-          win.data = null;
-          win.zIndex = INITIAL_Z_INDEX;
-        }
+        if (!win) return;
+        win.isOpen = false;
+        win.zIndex = INITIAL_Z_INDEX;
+        win.data = null;
+        win.isMaximized = false; // Always reset maximized state on close
+      });
+    },
+
+    minimizeWindow: (windowKey) => {
+      set((state) => {
+        const win = state.windows[windowKey];
+        if (!win) return;
+        win.isOpen = false;
       });
     },
 
     focusWindow: (windowKey) => {
       set((state) => {
         const win = state.windows[windowKey];
-        if (win) {
-          win.zIndex = state.nextZIndex++;
-        }
+
+        win.zIndex = state.nextZIndex++;
+      });
+    },
+
+    maximizeWindow: (windowKey) => {
+      set((state) => {
+        const win = state.windows[windowKey];
+        if (!win) return;
+        win.isMaximized = true;
+      });
+    },
+
+    toggleMaximizeWindow: (windowKey) => {
+      set((state) => {
+        const win = state.windows[windowKey];
+        if (!win) return;
+        win.isMaximized = !win.isMaximized;
       });
     },
   })),

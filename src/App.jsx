@@ -1,5 +1,10 @@
+import { Safari, Terminal } from "#components/windows";
 import { Navbar, Welcome, Dock } from "./components";
+import { gsap } from "gsap";
+import { Draggable } from "gsap/draggable";
 import React from "react";
+
+gsap.registerPlugin(Draggable);
 
 const App = () => {
   return (
@@ -7,6 +12,9 @@ const App = () => {
       <Navbar />
       <Welcome />
       <Dock />
+
+      <Terminal />
+      <Safari />
     </main>
   );
 };

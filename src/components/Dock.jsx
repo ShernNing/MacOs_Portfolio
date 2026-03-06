@@ -84,7 +84,7 @@ const Dock = () => {
               }
               data-tooltip-delay-show={150}
               disabled={!canOpen}
-              onClick={() => canOpen && toggleApp(id, canOpen)}
+              onClick={() => canOpen && toggleApp({ id, name, icon, canOpen })}
             >
               <img
                 src={`/images/${icon}`}
