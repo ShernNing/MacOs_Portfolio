@@ -10,7 +10,9 @@ const Terminal = () => {
       <div id='window-header-terminal' className='window-header'>
         <WindowControls target='terminal' />
 
-        <h2>Tech Stack</h2>
+        <h2 className='w-full absolute left-0 right-0 mx-auto text-center pointer-events-none'>
+          Tech Stack
+        </h2>
       </div>
 
       <div className='techstack'>
