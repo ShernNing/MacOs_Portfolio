@@ -27,10 +27,16 @@ const setupTextHover = (container, type) => {
   const letters = container.querySelectorAll("span");
   const { min, max, default: base } = FONT_WEIGHTS[type];
 
-  const animateLetter = (letter, weight, duration = 0.25) => {
+  const animateLetter = (
+    letter,
+    weight,
+    duration = 0.25,
+    ease = "power2.out",
+  ) => {
+    gsap.killTweensOf(letter);
     return gsap.to(letter, {
       duration,
-      ease: "power2.out",
+      ease,
       fontVariationSettings: `'wght' ${weight}`,
     });
   };
@@ -51,7 +57,9 @@ const setupTextHover = (container, type) => {
   };
 
   const handleMouseLeave = () => {
-    letters.forEach((letter) => animateLetter(letter, base, 0.3));
+    letters.forEach((letter) =>
+      animateLetter(letter, base, 0.45, "power3.out"),
+    );
   };
 
   container.addEventListener("mousemove", handleMouseMove);
@@ -79,21 +87,34 @@ const Welcome = () => {
   }, []);
 
   return (
-    <section id='welcome' className='gap-8'>
-      <p ref={subtitleRef} style={{ display: "inline-block" }}>
+    <section id='welcome' className='gap-2 px-4 sm:gap-8 sm:px-0'>
+      <p
+        ref={subtitleRef}
+        style={{ display: "inline-block" }}
+        className='text-xl xs:text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-georama text-center'
+      >
         {renderText(
           "Hey there, I'm Shern Ning! Welcome to my".split(""),
-          "text-3xl font-georama",
+          "text-inherit font-georama",
           100,
         )}
       </p>
-      <h1 ref={titleRef} style={{ display: "inline-block" }}>
-        {renderText("portfolio".split(""), "text-9xl font-georama italic", 200)}
+      <h1
+        ref={titleRef}
+        style={{ display: "inline-block" }}
+        className='text-4xl xs:text-xl sm:text-7xl md:text-8xl lg:text-9xl font-georama italic text-center'
+      >
+        {renderText(
+          "portfolio".split(""),
+          "text-inherit font-georama italic",
+          300,
+        )}
       </h1>
       <div className='small-screen'>
-        <p>
+        <p className='text-black'>
           This Portfolio is currently designed for desktop/tablet screens only.
         </p>
+        <p className='text-black'>Stay tuned for more updates!</p>
       </div>
     </section>
   );

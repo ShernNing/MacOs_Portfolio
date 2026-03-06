@@ -120,20 +120,42 @@ body {
     @apply flex gap-2;
 
     .close {
-      @apply size-3.5 rounded-full bg-[#ff6157] cursor-pointer;
+      @apply size-3.5 rounded-full bg-[#ff6157] cursor-pointer hover:bg-[#ff6157]/60;
     }
 
     .minimize {
-      @apply size-3.5 rounded-full bg-[#ffc030];
+      @apply size-3.5 rounded-full bg-[#ffc030] cursor-pointer hover:bg-[#ffc030]/60;
     }
 
     .maximize {
-      @apply size-3.5 rounded-full bg-[#2acb42];
+      @apply size-3.5 rounded-full bg-[#2acb42] cursor-pointer hover:bg-[#2acb42]/60;
     }
   }
 
-  #window-header {
+  .window-header {
     @apply flex items-center justify-between px-4 py-3 rounded-t-lg bg-gray-50 border-b border-gray-200 select-none text-sm text-gray-400;
+  }
+
+  #window-header {
+    /* For legacy support, but prefer .window-header */
+    @apply flex items-center justify-between px-4 py-3 rounded-t-lg bg-gray-50 border-b border-gray-200 select-none text-sm text-gray-400;
+  }
+
+  /* Update any nested selectors for #window-header to also support .window-header */
+  #resume {
+    .window-header {
+      h2 {
+        @apply font-bold text-sm text-center flex-1;
+      }
+    }
+  }
+
+  #imgfile {
+    .window-header {
+      p {
+        @apply font-bold text-[#5f6266];
+      }
+    }
   }
 
   #safari {

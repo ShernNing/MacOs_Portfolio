@@ -1,7 +1,7 @@
-import { Terminal } from "#components/windows";
+import { Safari, Terminal } from "#components/windows";
 import { Navbar, Welcome, Dock } from "./components";
 import { gsap } from "gsap";
-import { Draggable } from "gsap/Draggable";
+import { Draggable } from "gsap/draggable";
 import React from "react";
 
 gsap.registerPlugin(Draggable);
@@ -14,6 +14,7 @@ const App = () => {
       <Dock />
 
       <Terminal />
+      <Safari />
     </main>
   );
 };
