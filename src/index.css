@@ -86,7 +86,25 @@ body {
     }
 
     .tooltip {
-      @apply !py-1 !px-3 !w-fit !text-center !text-xs !rounded-md !bg-blue-200 !text-blue-900 !shadow-2xl;
+      @apply !py-1 !px-3 !w-fit !text-center !text-xs !rounded-md !shadow-2xl;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.55) 60%,
+        rgba(230, 240, 255, 0.35) 100%
+      );
+      color: #222;
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      box-shadow:
+        0 8px 32px 0 rgba(31, 38, 135, 0.12),
+        0 1.5px 4px 0 rgba(0, 0, 0, 0.08);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition:
+        background 0.2s,
+        box-shadow 0.2s;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.25);
     }
 
     .dock-icon {
