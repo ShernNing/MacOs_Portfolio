@@ -1,8 +1,11 @@
 import { navIcons, navLinks } from "#constants";
+import useWindowStore from "#store/window";
 import dayjs from "dayjs";
 import React from "react";
 
 const Navbar = () => {
+  const { openWindow } = useWindowStore();
+
   const [currentTime, setCurrentTime] = React.useState(dayjs());
 
   React.useEffect(() => {
@@ -17,13 +20,44 @@ const Navbar = () => {
   return (
     <nav>
       <div>
-        <img src='/images/logo.svg' alt='logo' />
-        <p className='font-bold'>Shern Ning's Portfolio</p>
+        <a
+          href='/'
+          style={{
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+            textDecoration: "none",
+          }}
+        >
+          <img
+            src='/images/logo.svg'
+            alt='logo'
+            style={{ cursor: "pointer" }}
+          />
+        </a>
+        <a
+          href='/'
+          style={{
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+            textDecoration: "none",
+          }}
+        >
+          <p
+            className='font-bold'
+            style={{ marginLeft: 0, cursor: "pointer", color: "inherit" }}
+          >
+            Shern Ning's Portfolio
+          </p>
+        </a>
 
         <ul>
-          {navLinks.map(({ id, name, link }) => (
-            <li key={id}>
-              <a href={link}>{name}</a>
+          {navLinks.map(({ id, name, link, type }) => (
+            <li key={id} onClick={() => openWindow(type)}>
+              <a href={link} style={{ cursor: "pointer" }}>
+                {name}
+              </a>
             </li>
           ))}
         </ul>
