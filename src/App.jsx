@@ -10,7 +10,7 @@ import {
 } from "#components/windows";
 import { Navbar, Welcome, Dock, Home } from "./components";
 import { gsap } from "gsap";
-import { Draggable } from "gsap/draggable";
+import { Draggable } from "gsap/Draggable";
 import React from "react";
 
 gsap.registerPlugin(Draggable);
