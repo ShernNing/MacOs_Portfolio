@@ -25,8 +25,18 @@ const Text = () => {
 
       <div className='p-4 space-y-6 bg-white'>
         {image ? (
-          <div className='w-full'>
-            <img src={image} alt={name} className='w-full h-auto rounded' />
+          <div className='w-full flex justify-center'>
+            <img
+              src={image}
+              alt={name}
+              className='rounded object-cover'
+              style={{
+                width: 240,
+                height: 240,
+                maxWidth: "100%",
+                maxHeight: "100%",
+              }}
+            />
           </div>
         ) : null}
 
