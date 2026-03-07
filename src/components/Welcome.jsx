@@ -110,11 +110,51 @@ const Welcome = () => {
           300,
         )}
       </h1>
-      <div className='small-screen'>
-        <p className='text-black'>
-          This Portfolio is currently designed for desktop/tablet screens only.
+      <div
+        className='small-screen sm:hidden flex flex-col items-center justify-center gap-2 px-4 py-3 rounded-xl shadow-lg'
+        style={{
+          position: "absolute",
+          top: "5%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "100%",
+          maxWidth: "420px",
+          zIndex: 30,
+          background:
+            "linear-gradient(135deg, rgba(255,255,255,0.7) 60%, rgba(230,240,255,0.5) 100%)",
+          backdropFilter: "blur(12px) saturate(1.2)",
+          WebkitBackdropFilter: "blur(12px) saturate(1.2)",
+          border: "1.5px solid rgba(180,200,255,0.18)",
+          boxShadow:
+            "0 4px 24px 0 rgba(120,140,180,0.10), 0 1.5px 4px 0 rgba(255,255,255,0.18) inset",
+          paddingBottom: "28px",
+        }}
+      >
+        <svg
+          width='32'
+          height='32'
+          fill='none'
+          viewBox='0 0 24 24'
+          aria-hidden='true'
+          className='mb-1'
+        >
+          <circle cx='12' cy='12' r='10' fill='#e0e7ef' />
+          <path
+            d='M12 8v4m0 4h.01'
+            stroke='#2563eb'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          />
+        </svg>
+        <p className='text-gray-800 font-semibold text-base text-center'>
+          Desktop Experience Recommended
         </p>
-        <p className='text-black'>Stay tuned for more updates!</p>
+        <p className='text-gray-600 text-sm text-center'>
+          This portfolio is currently designed for desktop screens only.
+          <br />
+          Some features may be limited on mobile.
+        </p>
       </div>
     </section>
   );

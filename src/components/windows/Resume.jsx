@@ -47,16 +47,16 @@ const Resume = () => {
           className='w-full absolute left-0 right-0 mx-auto text-center pointer-events-none'
           aria-label='Resume PDF'
         >
-          Resume.pdf
+          Shern Ning Tan Resume.pdf
         </h2>
         <a
-          href='files/resume copy.pdf'
+          href='files/Shern Ning Tan Resume.pdf'
           download
           className='cursor-pointer'
           title='Download resume'
           aria-label='Download resume as PDF'
         >
-          <Download className='icon' />
+          <Download className='icon cursor-pointer' />
         </a>
       </div>
       <div
@@ -64,14 +64,13 @@ const Resume = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: 16,
         }}
       >
         {pdfError ? (
           <div className='text-red-600 font-semibold p-4'>{pdfError}</div>
         ) : (
           <Document
-            file='files/resume copy.pdf'
+            file='files/Shern Ning Tan Resume.pdf'
             onLoadSuccess={onDocumentLoadSuccess}
             onLoadError={onDocumentError}
             loading={<div className='p-4'>Loading PDF...</div>}
@@ -95,23 +94,68 @@ const Resume = () => {
           </Document>
         )}
         <div
-          style={{ display: "flex", gap: 12, marginTop: 12, marginBottom: 12 }}
+          style={{
+            display: "flex",
+            gap: 6,
+            marginBottom: 16,
+          }}
         >
           <button
             aria-label='Previous page'
             onClick={() => setPageNumber((p) => Math.max(1, p - 1))}
             disabled={pageNumber <= 1}
             style={{
-              padding: "6px 16px",
-              borderRadius: 4,
-              border: "1px solid #ccc",
-              background: pageNumber <= 1 ? "#eee" : "#fff",
+              padding: "3px 12px",
+              borderRadius: 999,
+              border:
+                pageNumber <= 1
+                  ? "1px solid #e0e0e0"
+                  : "1px solid rgba(180,180,200,0.18)",
+              background:
+                pageNumber <= 1
+                  ? "rgba(245,245,247,0.7)"
+                  : "rgba(255,255,255,0.35)",
+              color: pageNumber <= 1 ? "#b0b0b0" : "#222",
+              fontWeight: 400,
+              fontSize: 12,
+              boxShadow:
+                pageNumber <= 1
+                  ? "none"
+                  : "0 1.5px 6px 0 rgba(120,140,180,0.10)",
               cursor: pageNumber <= 1 ? "not-allowed" : "pointer",
+              transition: "all 0.18s cubic-bezier(.4,0,.2,1)",
+              outline: "none",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
+              WebkitAppearance: "none",
+              appearance: "none",
+            }}
+            onMouseOver={(e) => {
+              if (pageNumber > 1) {
+                e.currentTarget.style.background = "rgba(230,240,255,0.7)";
+                e.currentTarget.style.color = "#235390";
+                e.currentTarget.style.borderColor = "#b3cfff";
+              }
+            }}
+            onMouseOut={(e) => {
+              if (pageNumber > 1) {
+                e.currentTarget.style.background = "rgba(255,255,255,0.35)";
+                e.currentTarget.style.color = "#222";
+                e.currentTarget.style.borderColor = "rgba(180,180,200,0.18)";
+              }
             }}
           >
-            Previous
+            ◀
           </button>
-          <span style={{ alignSelf: "center" }}>
+          <span
+            style={{
+              alignSelf: "center",
+              fontSize: 12,
+              color: "#666",
+              fontWeight: 400,
+              padding: "0 4px",
+            }}
+          >
             Page {pageNumber} of {numPages || "?"}
           </span>
           <button
@@ -119,15 +163,48 @@ const Resume = () => {
             onClick={() => setPageNumber((p) => Math.min(numPages, p + 1))}
             disabled={!numPages || pageNumber >= numPages}
             style={{
-              padding: "6px 16px",
-              borderRadius: 4,
-              border: "1px solid #ccc",
-              background: !numPages || pageNumber >= numPages ? "#eee" : "#fff",
+              padding: "3px 12px",
+              borderRadius: 999,
+              border:
+                !numPages || pageNumber >= numPages
+                  ? "1px solid #e0e0e0"
+                  : "1px solid rgba(180,180,200,0.18)",
+              background:
+                !numPages || pageNumber >= numPages
+                  ? "rgba(245,245,247,0.7)"
+                  : "rgba(255,255,255,0.35)",
+              color: !numPages || pageNumber >= numPages ? "#b0b0b0" : "#222",
+              fontWeight: 400,
+              fontSize: 12,
+              boxShadow:
+                !numPages || pageNumber >= numPages
+                  ? "none"
+                  : "0 1.5px 6px 0 rgba(120,140,180,0.10)",
               cursor:
                 !numPages || pageNumber >= numPages ? "not-allowed" : "pointer",
+              transition: "all 0.18s cubic-bezier(.4,0,.2,1)",
+              outline: "none",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
+              WebkitAppearance: "none",
+              appearance: "none",
+            }}
+            onMouseOver={(e) => {
+              if (numPages && pageNumber < numPages) {
+                e.currentTarget.style.background = "rgba(230,240,255,0.7)";
+                e.currentTarget.style.color = "#235390";
+                e.currentTarget.style.borderColor = "#b3cfff";
+              }
+            }}
+            onMouseOut={(e) => {
+              if (numPages && pageNumber < numPages) {
+                e.currentTarget.style.background = "rgba(255,255,255,0.35)";
+                e.currentTarget.style.color = "#222";
+                e.currentTarget.style.borderColor = "rgba(180,180,200,0.18)";
+              }
             }}
           >
-            Next
+            ▶
           </button>
         </div>
       </div>
