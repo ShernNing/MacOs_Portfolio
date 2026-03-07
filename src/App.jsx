@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   Contact,
+  Photos,
 } from "#components/windows";
 import { Navbar, Welcome, Dock, Home } from "./components";
 import { gsap } from "gsap";
@@ -28,6 +29,7 @@ const App = () => {
       <Text />
       <Image />
       <Contact />
+      <Photos />
       <Home />
     </main>
   );
