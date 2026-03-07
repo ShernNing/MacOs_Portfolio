@@ -23,7 +23,9 @@ const Resume = () => {
     <>
       <div id='window-header-resume' className='window-header'>
         <WindowControls target='resume' />
-        <h2>Resume.pdf</h2>
+        <h2 className='w-full absolute left-0 right-0 mx-auto text-center pointer-events-none'>
+          Resume.pdf
+        </h2>
         <a
           href='files/resume.pdf'
           download
