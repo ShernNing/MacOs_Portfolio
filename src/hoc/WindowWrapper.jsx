@@ -87,6 +87,7 @@ const WindowWrapper = (Component, windowKey) => {
         ref={ref}
         style={windowStyle}
         className='absolute'
+        onMouseDown={() => focusWindow(windowKey)}
       >
         <Component {...props} />
       </section>
