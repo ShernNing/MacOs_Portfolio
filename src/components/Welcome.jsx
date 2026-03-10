@@ -79,10 +79,12 @@ const Welcome = () => {
   useGSAP(() => {
     const titleCleanup = setupTextHover(titleRef.current, "title");
     const subtitleCleanup = setupTextHover(subtitleRef.current, "subtitle");
+    const subtitle2Cleanup = setupTextHover(subtitleRef.current2, "subtitle");
 
     return () => {
       titleCleanup && titleCleanup();
       subtitleCleanup && subtitleCleanup();
+      subtitle2Cleanup && subtitle2Cleanup();
     };
   }, []);
 
@@ -93,8 +95,39 @@ const Welcome = () => {
         style={{ display: "inline-block" }}
         className='text-xl xs:text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-georama text-center'
       >
+        {(() => {
+          const text = "Hey there, I'm Shern Ning!";
+          const chars = text.split("");
+          const boldStart = text.indexOf("Shern Ning");
+          const boldEnd = boldStart + "Shern Ning".length;
+          return chars.map((char, i) =>
+            i >= boldStart && i < boldEnd ? (
+              <span
+                key={i}
+                className='text-inherit font-georama'
+                style={{ fontVariationSettings: `'wght' 200` }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </span>
+            ) : (
+              <span
+                key={i}
+                className='text-inherit font-georama'
+                style={{ fontVariationSettings: `'wght' 100` }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </span>
+            ),
+          );
+        })()}
+      </p>
+      <p
+        ref={(el) => (subtitleRef.current2 = el)}
+        style={{ display: "inline-block" }}
+        className='text-xl xs:text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-georama text-center mt-2'
+      >
         {renderText(
-          "Hey there, I'm Shern Ning! Welcome to my".split(""),
+          "Welcome to my interactive MacOs".split(""),
           "text-inherit font-georama",
           100,
         )}
@@ -105,7 +138,7 @@ const Welcome = () => {
         className='text-4xl xs:text-xl sm:text-7xl md:text-8xl lg:text-9xl font-georama italic text-center'
       >
         {renderText(
-          "portfolio".split(""),
+          "Portfolio".split(""),
           "text-inherit font-georama italic",
           300,
         )}
