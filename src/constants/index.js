@@ -102,27 +102,68 @@ const blogPosts = [
 const techStack = [
   {
     category: "Frontend",
-    items: ["React.js", "Next.js", "TypeScript"],
+    items: [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "Context API",
+      "Custom Hooks",
+      "Data Caching",
+      "Performance Optimization"
+    ],
   },
   {
-    category: "Mobile",
-    items: ["React Native", "Expo"],
+    category: "Testing & Security",
+    items: [
+      "Jest",
+      "React Testing Library",
+      "Secure API Consumption"
+    ],
   },
   {
-    category: "Styling",
-    items: ["Tailwind CSS", "Sass", "CSS"],
+    category: "Cloud & Infrastructure",
+    items: [
+      "AWS (EC2, S3, CloudFront, CloudSearch)",
+      "Vercel",
+      "CI/CD"
+    ],
   },
   {
-    category: "Backend",
-    items: ["Node.js", "Express", "NestJS", "Hono"],
+    category: "Media & Native APIs",
+    items: [
+      "Live Stream/Podcast Integration",
+      "Native Web APIs",
+      "Ad-Tech",
+      "Cross-Browser Compatibility"
+    ],
   },
   {
-    category: "Database",
-    items: ["MongoDB", "PostgreSQL"],
+    category: "State & Data",
+    items: [
+      "RESTful API Integration",
+      "Strapi (Legacy Migration)",
+      "Firebase",
+      "Webhooks"
+    ],
+  },
+  {
+    category: "Design & UI",
+    items: [
+      "Tailwind CSS",
+      "SCSS",
+      "Responsive Component Architecture",
+      "Figma"
+    ],
   },
   {
     category: "Dev Tools",
-    items: ["Git", "GitHub", "Docker"],
+    items: [
+      "Git",
+      "GitHub",
+      "GitLab",
+      "Vercel",
+      "Docker"
+    ],
   },
 ];
 

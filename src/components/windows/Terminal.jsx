@@ -21,20 +21,22 @@ const Terminal = () => {
           show tech stack
         </p>
 
-        <div className='label'>
-          <p className='w-32'>Category</p>
-          <p>Technologies</p>
+        <div className='label flex gap-4 mb-2'>
+          <p className='font-bold min-w-max'>Category</p>
+          <p className='font-bold flex-1 ml-[72px]'>Technologies</p>
         </div>
 
         <ul className='content'>
           {techStack.map(({ category, items }) => (
-            <li key={category} className='flex items-center'>
-              <Check className='check' size={20} />
-              <h3>{category}</h3>
-              <ul>
+            <li key={category} className='flex gap-4 mb-4 items-start'>
+              <div className='flex items-center gap-2 min-w-max'>
+                <Check className='check' size={20} />
+                <h3 className='font-semibold text-[#00A154]'>{category}</h3>
+              </div>
+              <ul className='flex flex-wrap gap-x-3 gap-y-1 flex-1'>
                 {items.map((item, i) => (
-                  <li key={i}>
-                    {item} {i < items.length - 1 ? "," : ""}
+                  <li key={i} className='whitespace-normal'>
+                    {item}{i < items.length - 1 ? ',' : ''}
                   </li>
                 ))}
               </ul>
