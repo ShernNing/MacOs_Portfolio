@@ -51,22 +51,29 @@ const Safari = () => {
       {/* Blog content below header */}
       <div className='blog w-full px-0'>
         <h2>My Thoughts</h2>
-        <div className='space-y-8'>
-          {blogPosts.map(({ id, image, title, date, link }) => (
-            <div key={id} className='blog-post grid grid-cols-12 gap-5'>
-              <div className='col-span-2'>
-                <img src={image} alt={title} />
+        {blogPosts.length === 0 ? (
+          <div className='flex flex-col items-center justify-center min-h-[200px] text-gray-400'>
+            <h3 className='text-2xl font-bold mb-2'>Coming Soon</h3>
+            <p>Stay tuned for upcoming posts and insights!</p>
+          </div>
+        ) : (
+          <div className='space-y-8'>
+            {blogPosts.map(({ id, image, title, date, link }) => (
+              <div key={id} className='blog-post grid grid-cols-12 gap-5'>
+                <div className='col-span-2'>
+                  <img src={image} alt={title} />
+                </div>
+                <div className='content col-span-10'>
+                  <p>{date}</p>
+                  <h3>{title}</h3>
+                  <a href={link} target='_blank' rel='noopener noreferrer'>
+                    Check out the full post <MoveRight className='icon-hover' />
+                  </a>
+                </div>
               </div>
-              <div className='content col-span-10'>
-                <p>{date}</p>
-                <h3>{title}</h3>
-                <a href={link} target='_blank' rel='noopener noreferrer'>
-                  Check out the full post <MoveRight className='icon-hover' />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
