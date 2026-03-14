@@ -64,6 +64,8 @@ const Resume = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          maxHeight: "85vh",
+          overflowY: "auto",
         }}
       >
         {pdfError ? (

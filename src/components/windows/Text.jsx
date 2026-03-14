@@ -13,7 +13,7 @@ const Text = () => {
 
   return (
     <>
-      <div id='window-header-txtfile' className='window-header' role='banner'>
+      <div id='window-header-txtfile' className='window-header border-2' role='banner'>
         <WindowControls target='txtfile' />
         <h2
           className='w-full absolute left-0 right-0 mx-auto text-center pointer-events-none'
@@ -23,7 +23,7 @@ const Text = () => {
         </h2>
       </div>
 
-      <div className='p-4 space-y-6 bg-white'>
+      <div className='p-4 space-y-6 bg-white' style={{ maxHeight: '75vh', overflowY: 'auto' }}>
         {image ? (
           <div className='w-full flex justify-center'>
             <img

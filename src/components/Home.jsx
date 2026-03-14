@@ -91,7 +91,7 @@ const Home = () => {
         {aboutMeTextFile && (
           <li
             key='about-me-shortcut'
-            className='group folder top-[60vh] left-[2.2vw]'
+            className='group folder top-[60vh] left-[3.2vw]'
             onClick={handleOpenAboutMe}
             style={{ zIndex: 1 }}
           >
@@ -104,7 +104,7 @@ const Home = () => {
         {resumePdfFile && (
           <li
             key='resume-shortcut'
-            className='group folder top-[46vh] left-[2vw]'
+            className='group folder top-[46vh] left-[3vw]'
             onClick={handleOpenResume}
             style={{ zIndex: 1 }}
           >
@@ -116,7 +116,7 @@ const Home = () => {
         {/* Guide shortcut */}
         <li
           key='guide-shortcut'
-          className='group folder top-[73vh] left-[2.6vw]'
+          className='group folder top-[73vh] left-[3.6vw]'
           onClick={handleOpenGuide}
           style={{ zIndex: 1 }}
         >
