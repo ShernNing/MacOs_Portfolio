@@ -15,9 +15,9 @@ const Contact = () => {
 
       <div className='p-4 space-y-5 bg-white'>
         <img
-          src='/images/adrian.jpg'
+          src='/images/gal2.png'
           alt='Shern Ning'
-          className='w-20 rounded-full'
+          className='w-20 aspect-square rounded-full object-cover'
         />
 
         <h3>Let's get in Touch!</h3>
