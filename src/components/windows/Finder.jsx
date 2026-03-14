@@ -42,7 +42,7 @@ const Finder = () => {
         <Search className='icon' />
       </div>
 
-      <div className='bg-white flex h-full'>
+      <div className='bg-white flex h-full min-h-[400px]'>
         <div className='sidebar'>
           <div>
             <h3>Favourites</h3>
