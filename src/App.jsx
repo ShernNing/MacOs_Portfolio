@@ -16,7 +16,7 @@ import React, { Suspense } from "react";
 
 gsap.registerPlugin(Draggable);
 
-// react-pdf is heavy — only load it once the Resume window is opened
+// react-pdf is heavy - only load it once the Resume window is opened
 const Resume = React.lazy(() => import("#components/windows/Resume"));
 
 const App = () => {

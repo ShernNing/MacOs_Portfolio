@@ -33,7 +33,7 @@ const WindowWrapper = (Component, windowKey) => {
     useGSAP(() => {
       const el = ref.current;
       if (!el) return;
-      // Windows like txtfile/imgfile render nothing until they get data —
+      // Windows like txtfile/imgfile render nothing until they get data -
       // no header means nothing to drag (re-runs on open when it appears)
       const header = el.querySelector(`#window-header-${windowKey}`);
       if (!header) return;
