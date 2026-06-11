@@ -6,7 +6,8 @@ import React from "react";
 import { Tooltip } from "react-tooltip";
 
 const Dock = () => {
-  const { openWindow, closeWindow, windows } = useWindowStore();
+  const openWindow = useWindowStore((s) => s.openWindow);
+  const closeWindow = useWindowStore((s) => s.closeWindow);
 
   const dockRef = React.useRef(null);
 
@@ -61,8 +62,8 @@ const Dock = () => {
   const toggleApp = (app) => {
     if (!app.canOpen) return;
 
-    const window = windows[app.id];
-    if (window?.isOpen) {
+    const win = useWindowStore.getState().windows[app.id];
+    if (win?.isOpen) {
       closeWindow(app.id);
     } else {
       openWindow(app.id);
@@ -93,10 +94,10 @@ const Dock = () => {
                 className={canOpen ? " " : "opacity-60"}
               />
             </button>
-
-            <Tooltip id='dock-tooltip' place='top' className='tooltip' />
           </div>
         ))}
+
+        <Tooltip id='dock-tooltip' place='top' className='tooltip' />
       </div>
     </section>
   );

@@ -4,8 +4,7 @@ import useWindowStore from "#store/window";
 import WindowControls from "#components/WindowControls";
 
 const Text = () => {
-  const { windows } = useWindowStore();
-  const data = windows.txtfile?.data;
+  const data = useWindowStore((s) => s.windows.txtfile?.data);
 
   if (!data) return null;
 

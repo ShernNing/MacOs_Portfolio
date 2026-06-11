@@ -4,8 +4,7 @@ import useWindowStore from "#store/window";
 import WindowControls from "#components/WindowControls";
 
 const Image = () => {
-  const { windows } = useWindowStore();
-  const data = windows.imgfile?.data;
+  const data = useWindowStore((s) => s.windows.imgfile?.data);
 
   if (!data) return null;
 

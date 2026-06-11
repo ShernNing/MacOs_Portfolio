@@ -6,12 +6,51 @@ import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url,
+).toString();
 
-// new URL(
-//   "pdfjs-dist/build/pdf.worker.min.mjs",
-//   import.meta.url,
-// ).toString();
+const pagerButtonStyle = (disabled) => ({
+  padding: "3px 12px",
+  borderRadius: 999,
+  border: disabled ? "1px solid #e0e0e0" : "1px solid rgba(180,180,200,0.18)",
+  background: disabled ? "rgba(245,245,247,0.7)" : "rgba(255,255,255,0.35)",
+  color: disabled ? "#b0b0b0" : "#222",
+  fontWeight: 400,
+  fontSize: 12,
+  boxShadow: disabled ? "none" : "0 1.5px 6px 0 rgba(120,140,180,0.10)",
+  cursor: disabled ? "not-allowed" : "pointer",
+  transition: "all 0.18s cubic-bezier(.4,0,.2,1)",
+  outline: "none",
+  backdropFilter: "blur(8px)",
+  WebkitBackdropFilter: "blur(8px)",
+  WebkitAppearance: "none",
+  appearance: "none",
+});
+
+const PagerButton = ({ label, disabled, onClick, children }) => (
+  <button
+    aria-label={label}
+    onClick={onClick}
+    disabled={disabled}
+    style={pagerButtonStyle(disabled)}
+    onMouseOver={(e) => {
+      if (disabled) return;
+      e.currentTarget.style.background = "rgba(230,240,255,0.7)";
+      e.currentTarget.style.color = "#235390";
+      e.currentTarget.style.borderColor = "#b3cfff";
+    }}
+    onMouseOut={(e) => {
+      if (disabled) return;
+      e.currentTarget.style.background = "rgba(255,255,255,0.35)";
+      e.currentTarget.style.color = "#222";
+      e.currentTarget.style.borderColor = "rgba(180,180,200,0.18)";
+    }}
+  >
+    {children}
+  </button>
+);
 
 const Resume = () => {
   const [numPages, setNumPages] = React.useState(null);
@@ -24,7 +63,7 @@ const Resume = () => {
     setPdfError(null);
   };
 
-  const onDocumentError = (error) => {
+  const onDocumentError = () => {
     setPdfError("Failed to load PDF. Please try again later.");
   };
 
@@ -102,53 +141,13 @@ const Resume = () => {
             marginBottom: 16,
           }}
         >
-          <button
-            aria-label='Previous page'
-            onClick={() => setPageNumber((p) => Math.max(1, p - 1))}
+          <PagerButton
+            label='Previous page'
             disabled={pageNumber <= 1}
-            style={{
-              padding: "3px 12px",
-              borderRadius: 999,
-              border:
-                pageNumber <= 1
-                  ? "1px solid #e0e0e0"
-                  : "1px solid rgba(180,180,200,0.18)",
-              background:
-                pageNumber <= 1
-                  ? "rgba(245,245,247,0.7)"
-                  : "rgba(255,255,255,0.35)",
-              color: pageNumber <= 1 ? "#b0b0b0" : "#222",
-              fontWeight: 400,
-              fontSize: 12,
-              boxShadow:
-                pageNumber <= 1
-                  ? "none"
-                  : "0 1.5px 6px 0 rgba(120,140,180,0.10)",
-              cursor: pageNumber <= 1 ? "not-allowed" : "pointer",
-              transition: "all 0.18s cubic-bezier(.4,0,.2,1)",
-              outline: "none",
-              backdropFilter: "blur(8px)",
-              WebkitBackdropFilter: "blur(8px)",
-              WebkitAppearance: "none",
-              appearance: "none",
-            }}
-            onMouseOver={(e) => {
-              if (pageNumber > 1) {
-                e.currentTarget.style.background = "rgba(230,240,255,0.7)";
-                e.currentTarget.style.color = "#235390";
-                e.currentTarget.style.borderColor = "#b3cfff";
-              }
-            }}
-            onMouseOut={(e) => {
-              if (pageNumber > 1) {
-                e.currentTarget.style.background = "rgba(255,255,255,0.35)";
-                e.currentTarget.style.color = "#222";
-                e.currentTarget.style.borderColor = "rgba(180,180,200,0.18)";
-              }
-            }}
+            onClick={() => setPageNumber((p) => Math.max(1, p - 1))}
           >
             ◀
-          </button>
+          </PagerButton>
           <span
             style={{
               alignSelf: "center",
@@ -160,54 +159,13 @@ const Resume = () => {
           >
             Page {pageNumber} of {numPages || "?"}
           </span>
-          <button
-            aria-label='Next page'
-            onClick={() => setPageNumber((p) => Math.min(numPages, p + 1))}
+          <PagerButton
+            label='Next page'
             disabled={!numPages || pageNumber >= numPages}
-            style={{
-              padding: "3px 12px",
-              borderRadius: 999,
-              border:
-                !numPages || pageNumber >= numPages
-                  ? "1px solid #e0e0e0"
-                  : "1px solid rgba(180,180,200,0.18)",
-              background:
-                !numPages || pageNumber >= numPages
-                  ? "rgba(245,245,247,0.7)"
-                  : "rgba(255,255,255,0.35)",
-              color: !numPages || pageNumber >= numPages ? "#b0b0b0" : "#222",
-              fontWeight: 400,
-              fontSize: 12,
-              boxShadow:
-                !numPages || pageNumber >= numPages
-                  ? "none"
-                  : "0 1.5px 6px 0 rgba(120,140,180,0.10)",
-              cursor:
-                !numPages || pageNumber >= numPages ? "not-allowed" : "pointer",
-              transition: "all 0.18s cubic-bezier(.4,0,.2,1)",
-              outline: "none",
-              backdropFilter: "blur(8px)",
-              WebkitBackdropFilter: "blur(8px)",
-              WebkitAppearance: "none",
-              appearance: "none",
-            }}
-            onMouseOver={(e) => {
-              if (numPages && pageNumber < numPages) {
-                e.currentTarget.style.background = "rgba(230,240,255,0.7)";
-                e.currentTarget.style.color = "#235390";
-                e.currentTarget.style.borderColor = "#b3cfff";
-              }
-            }}
-            onMouseOut={(e) => {
-              if (numPages && pageNumber < numPages) {
-                e.currentTarget.style.background = "rgba(255,255,255,0.35)";
-                e.currentTarget.style.color = "#222";
-                e.currentTarget.style.borderColor = "rgba(180,180,200,0.18)";
-              }
-            }}
+            onClick={() => setPageNumber((p) => Math.min(numPages, p + 1))}
           >
             ▶
-          </button>
+          </PagerButton>
         </div>
       </div>
     </>

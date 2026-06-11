@@ -3,27 +3,34 @@ import React from "react";
 import { Tooltip } from "react-tooltip";
 
 const WindowControls = ({ target }) => {
-  const { closeWindow, minimizeWindow, toggleMaximizeWindow } =
-    useWindowStore();
+  const closeWindow = useWindowStore((s) => s.closeWindow);
+  const minimizeWindow = useWindowStore((s) => s.minimizeWindow);
+  const toggleMaximizeWindow = useWindowStore((s) => s.toggleMaximizeWindow);
 
   const tooltipId = `window-controls-tooltip-${target}`;
 
   return (
     <div id='window-controls'>
-      <div
+      <button
+        type='button'
         className='close'
+        aria-label='Close window'
         data-tooltip-id={tooltipId}
         data-tooltip-content='Close'
         onClick={() => closeWindow(target)}
       />
-      <div
+      <button
+        type='button'
         className='minimize'
+        aria-label='Minimize window'
         data-tooltip-id={tooltipId}
         data-tooltip-content='Minimize'
         onClick={() => minimizeWindow(target)}
       />
-      <div
+      <button
+        type='button'
         className='maximize'
+        aria-label='Maximize window'
         data-tooltip-id={tooltipId}
         data-tooltip-content='Maximize'
         onClick={() => toggleMaximizeWindow(target)}

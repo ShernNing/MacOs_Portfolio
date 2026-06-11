@@ -75,16 +75,17 @@ const Welcome = () => {
   const titleRef = React.useRef(null);
 
   const subtitleRef = React.useRef(null);
+  const subtitle2Ref = React.useRef(null);
 
   useGSAP(() => {
     const titleCleanup = setupTextHover(titleRef.current, "title");
     const subtitleCleanup = setupTextHover(subtitleRef.current, "subtitle");
-    const subtitle2Cleanup = setupTextHover(subtitleRef.current2, "subtitle");
+    const subtitle2Cleanup = setupTextHover(subtitle2Ref.current, "subtitle");
 
     return () => {
-      titleCleanup && titleCleanup();
-      subtitleCleanup && subtitleCleanup();
-      subtitle2Cleanup && subtitle2Cleanup();
+      titleCleanup();
+      subtitleCleanup();
+      subtitle2Cleanup();
     };
   }, []);
 
@@ -122,7 +123,7 @@ const Welcome = () => {
         })()}
       </p>
       <p
-        ref={(el) => (subtitleRef.current2 = el)}
+        ref={subtitle2Ref}
         style={{ display: "inline-block" }}
         className='text-xl xs:text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-georama text-center mt-2'
       >

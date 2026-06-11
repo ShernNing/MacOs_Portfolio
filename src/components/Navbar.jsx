@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import React from "react";
 
 const Navbar = () => {
-  const { openWindow } = useWindowStore();
+  const openWindow = useWindowStore((s) => s.openWindow);
 
   const [currentTime, setCurrentTime] = React.useState(dayjs());
 
@@ -53,11 +53,15 @@ const Navbar = () => {
         </a>
 
         <ul>
-          {navLinks.map(({ id, name, link, type }) => (
-            <li key={id} onClick={() => openWindow(type)}>
-              <a href={link} style={{ cursor: "pointer" }}>
-                {name}
-              </a>
+          {navLinks.map(({ id, name, type }) => (
+            <li key={id}>
+              <button
+                type='button'
+                onClick={() => openWindow(type)}
+                style={{ cursor: "pointer" }}
+              >
+                <p>{name}</p>
+              </button>
             </li>
           ))}
         </ul>

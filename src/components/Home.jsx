@@ -42,9 +42,27 @@ const guideTextFile = {
   ],
 };
 
+// Suppress the click that the browser fires right after a drag ends,
+// so dragging a desktop icon doesn't also open it
+const wasDragged = (e) => {
+  const el = e.currentTarget;
+  if (el.dataset.dragged === "true") {
+    delete el.dataset.dragged;
+    return true;
+  }
+  return false;
+};
+
+const keyboardActivate = (handler) => (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    handler();
+  }
+};
+
 const Home = () => {
-  const { setActiveLocation } = useLocationStore();
-  const { openWindow } = useWindowStore();
+  const setActiveLocation = useLocationStore((s) => s.setActiveLocation);
+  const openWindow = useWindowStore((s) => s.openWindow);
 
   const handleOpenProjectFinder = (project) => {
     setActiveLocation(project);
@@ -69,7 +87,12 @@ const Home = () => {
   };
 
   useGSAP(() => {
-    Draggable.create(".folder");
+    const instances = Draggable.create(".folder", {
+      onDragEnd: function () {
+        this.target.dataset.dragged = "true";
+      },
+    });
+    return () => instances.forEach((instance) => instance.kill());
   }, []);
 
   return (
@@ -80,7 +103,12 @@ const Home = () => {
           <li
             key={project.id}
             className={clsx("group folder", project.windowPosition)}
-            onClick={() => handleOpenProjectFinder(project)}
+            role='button'
+            tabIndex={0}
+            onClick={(e) =>
+              !wasDragged(e) && handleOpenProjectFinder(project)
+            }
+            onKeyDown={keyboardActivate(() => handleOpenProjectFinder(project))}
           >
             <img src='/images/folder.png' alt={project.name} />
             <p>{project.name}</p>
@@ -92,7 +120,10 @@ const Home = () => {
           <li
             key='about-me-shortcut'
             className='group folder top-[60vh] left-[3.2vw]'
-            onClick={handleOpenAboutMe}
+            role='button'
+            tabIndex={0}
+            onClick={(e) => !wasDragged(e) && handleOpenAboutMe()}
+            onKeyDown={keyboardActivate(handleOpenAboutMe)}
             style={{ zIndex: 1 }}
           >
             <img src='/images/txt.png' alt='About Me' />
@@ -105,7 +136,10 @@ const Home = () => {
           <li
             key='resume-shortcut'
             className='group folder top-[46vh] left-[3vw]'
-            onClick={handleOpenResume}
+            role='button'
+            tabIndex={0}
+            onClick={(e) => !wasDragged(e) && handleOpenResume()}
+            onKeyDown={keyboardActivate(handleOpenResume)}
             style={{ zIndex: 1 }}
           >
             <img src='/images/pdf.png' alt='Resume' />
@@ -117,7 +151,10 @@ const Home = () => {
         <li
           key='guide-shortcut'
           className='group folder top-[73vh] left-[3.6vw]'
-          onClick={handleOpenGuide}
+          role='button'
+          tabIndex={0}
+          onClick={(e) => !wasDragged(e) && handleOpenGuide()}
+          onKeyDown={keyboardActivate(handleOpenGuide)}
           style={{ zIndex: 1 }}
         >
           <img src='/images/txt.png' alt='Guide' />

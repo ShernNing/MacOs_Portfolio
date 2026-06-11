@@ -6,8 +6,9 @@ import React, { useLayoutEffect, useRef, useEffect } from "react";
 
 const WindowWrapper = (Component, windowKey) => {
   const Wrapped = (props) => {
-    const { focusWindow, windows } = useWindowStore();
-    const { isOpen, zIndex } = windows[windowKey];
+    const focusWindow = useWindowStore((s) => s.focusWindow);
+    const win = useWindowStore((s) => s.windows[windowKey]);
+    const { isOpen, zIndex, isMaximized } = win;
     const ref = useRef(null);
 
     // Animate window open
@@ -32,33 +33,23 @@ const WindowWrapper = (Component, windowKey) => {
     useGSAP(() => {
       const el = ref.current;
       if (!el) return;
-      const store = useWindowStore.getState();
-      const headerId = `window-header-${windowKey}`;
+      // Windows like txtfile/imgfile render nothing until they get data —
+      // no header means nothing to drag (re-runs on open when it appears)
+      const header = el.querySelector(`#window-header-${windowKey}`);
+      if (!header) return;
       const [instance] = Draggable.create(el, {
-        handle: `#${headerId}`,
+        handle: header,
         onPress: function () {
+          const store = useWindowStore.getState();
           if (store.windows[windowKey].isMaximized) {
             store.toggleMaximizeWindow(windowKey);
             return false;
           }
-          focusWindow(windowKey);
+          store.focusWindow(windowKey);
         },
       });
       return () => instance.kill();
     }, [windowKey, isOpen]);
-
-    useGSAP(() => {
-      const el = ref.current;
-      if (!el) return;
-
-      const headerId = `window-header-${windowKey}`;
-      const [instance] = Draggable.create(el, {
-        handle: `#${headerId}`,
-        onPress: () => focusWindow(windowKey),
-      });
-
-      return () => instance.kill();
-    }, []);
 
     useLayoutEffect(() => {
       const el = ref.current;
@@ -69,7 +60,7 @@ const WindowWrapper = (Component, windowKey) => {
     // Maximize logic: fill below navbar and above dock
     const NAVBAR_HEIGHT = 42; // px
     const DOCK_HEIGHT = 120; // px (adjust to match your dock's height + margin)
-    const windowStyle = windows[windowKey].isMaximized
+    const windowStyle = isMaximized
       ? {
           zIndex,
           position: "fixed",

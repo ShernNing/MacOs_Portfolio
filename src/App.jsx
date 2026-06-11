@@ -1,6 +1,5 @@
 import {
   Finder,
-  Resume,
   Safari,
   Terminal,
   Text,
@@ -9,13 +8,19 @@ import {
   Photos,
 } from "#components/windows";
 import { Navbar, Welcome, Dock, Home } from "./components";
+import useWindowStore from "#store/window";
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
-import React from "react";
+import React, { Suspense } from "react";
 
 gsap.registerPlugin(Draggable);
 
+// react-pdf is heavy — only load it once the Resume window is opened
+const Resume = React.lazy(() => import("#components/windows/Resume"));
+
 const App = () => {
+  const isResumeOpen = useWindowStore((s) => s.windows.resume.isOpen);
+
   return (
     <main>
       <Navbar />
@@ -24,7 +29,11 @@ const App = () => {
 
       <Terminal />
       <Safari />
-      <Resume />
+      {isResumeOpen && (
+        <Suspense fallback={null}>
+          <Resume />
+        </Suspense>
+      )}
       <Finder />
       <Text />
       <Image />

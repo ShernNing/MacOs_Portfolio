@@ -6,7 +6,7 @@ import { Mail, Search } from "lucide-react";
 import React from "react";
 
 const Photos = () => {
-  const { openWindow } = useWindowStore();
+  const openWindow = useWindowStore((s) => s.openWindow);
   return (
     <>
       <div id='window-header-photos' className='window-header'>

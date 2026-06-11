@@ -8,15 +8,24 @@ import { Search } from "lucide-react";
 import React from "react";
 
 const Finder = () => {
-  const { openWindow } = useWindowStore();
+  const openWindow = useWindowStore((s) => s.openWindow);
 
-  const { activeLocation, setActiveLocation } = useLocationStore();
+  const activeLocation = useLocationStore((s) => s.activeLocation);
+  const setActiveLocation = useLocationStore((s) => s.setActiveLocation);
 
   const renderList = (items) =>
     items.map((item) => (
       <li
         key={item.id}
+        role='button'
+        tabIndex={0}
         onClick={() => setActiveLocation(item)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setActiveLocation(item);
+          }
+        }}
         className={clsx(
           item.id === activeLocation.id ? "active" : "not-active",
         )}
@@ -55,11 +64,19 @@ const Finder = () => {
           </div>
         </div>
         <ul className='content'>
-          {activeLocation?.children.map((item) => (
+          {activeLocation?.children?.map((item) => (
             <li
               key={item.id}
               className={item.position}
+              role='button'
+              tabIndex={0}
               onClick={() => openItem(item)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  openItem(item);
+                }
+              }}
             >
               <img src={item.icon} alt={item.name} />
               <p>{item.name}</p>
