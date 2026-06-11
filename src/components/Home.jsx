@@ -161,7 +161,7 @@ const Home = () => {
         {aboutMeTextFile && (
           <li
             key='about-me-shortcut'
-            className='group folder top-[60vh] left-[3.2vw]'
+            className='group folder top-[38vh] left-[2vw]'
             role='button'
             tabIndex={0}
             onClick={(e) => !wasDragged(e) && handleOpenAboutMe()}
@@ -169,7 +169,7 @@ const Home = () => {
             style={{ zIndex: 1 }}
           >
             <img src='/images/txt.png' alt='About Me' />
-            <p>About Me</p>
+            <p className='pl-6'>About Me</p>
           </li>
         )}
 
@@ -177,7 +177,7 @@ const Home = () => {
         {resumePdfFile && (
           <li
             key='resume-shortcut'
-            className='group folder top-[46vh] left-[3vw]'
+            className='group folder top-[20vh] left-[2.5vw]'
             role='button'
             tabIndex={0}
             onClick={(e) => !wasDragged(e) && handleOpenResume()}
@@ -192,7 +192,7 @@ const Home = () => {
         {/* Guide shortcut */}
         <li
           key='guide-shortcut'
-          className='group folder top-[73vh] left-[3.6vw]'
+          className='group folder top-[56vh] left-[3.4vw]'
           role='button'
           tabIndex={0}
           onClick={(e) => !wasDragged(e) && handleOpenGuide()}
