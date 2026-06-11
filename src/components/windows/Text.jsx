@@ -12,11 +12,16 @@ const Text = () => {
 
   return (
     <>
-      <div id='window-header-txtfile' className='window-header border-2' role='banner'>
+      <div
+        id='window-header-txtfile'
+        className='window-header border-2 relative'
+        role='banner'
+      >
         <WindowControls target='txtfile' />
         <h2
-          className='w-full absolute left-0 right-0 mx-auto text-center pointer-events-none'
+          className='absolute left-0 right-0 px-20 truncate text-center text-sm font-bold text-gray-700 pointer-events-none'
           aria-label={name}
+          title={name}
         >
           {name}
         </h2>
