@@ -30,7 +30,7 @@ const guideTextFile = {
     "",
     "• Drag & Drop: Move any folder or shortcut on the Home screen by dragging it anywhere you like. Arrange your workspace just like a real desktop!",
     "• Finder: Click any project folder to open it in a Finder window. Inside Finder, you can browse project files, images, and links. Switch between folders by clicking on the sidebar tabs.",
-    "• Window Controls: Every window (Finder, Resume, Terminal, etc.) can be moved, resized, minimized, maximized, or closed using the colored buttons at the top left—just like macOS.",
+    "• Window Controls: Every window (Finder, Resume, Terminal, etc.) can be moved, resized, minimized, maximized, or closed using the colored buttons at the top left, just like macOS.",
     "• Dock: The Dock at the bottom gives you quick access to key apps like Portfolio, Articles, Gallery, Contact, and Skills. Click an icon to open or close its window.",
     "• Resume & About Me: Instantly open your Resume (PDF) or About Me (text) from the Home screen shortcuts for easy access.",
     "• Multi-Window: Open multiple windows at once and drag them around. Each window can be layered, focused, or hidden as you wish.",
@@ -105,9 +105,7 @@ const Home = () => {
             className={clsx("group folder", project.windowPosition)}
             role='button'
             tabIndex={0}
-            onClick={(e) =>
-              !wasDragged(e) && handleOpenProjectFinder(project)
-            }
+            onClick={(e) => !wasDragged(e) && handleOpenProjectFinder(project)}
             onKeyDown={keyboardActivate(() => handleOpenProjectFinder(project))}
           >
             <img src='/images/folder.png' alt={project.name} />

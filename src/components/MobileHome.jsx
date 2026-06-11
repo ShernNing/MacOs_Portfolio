@@ -33,7 +33,7 @@ const MobileHome = () => (
       <header className='text-white'>
         <h1 className='text-3xl font-bold'>Shern Ning Tan</h1>
         <p className='text-white/80 mt-1'>
-          Front-End Developer — React, Next.js, AWS
+          Front-End Developer - React, Next.js, AWS
         </p>
         <div className='flex flex-wrap gap-3 mt-4'>
           {socials.map((s) => (
@@ -54,9 +54,9 @@ const MobileHome = () => (
       </header>
 
       <p className='text-white/70 text-sm leading-relaxed'>
-        The full portfolio is an interactive macOS desktop — folders, windows,
-        a dock, the lot. It needs a bigger screen, so here's the quick tour
-        instead.
+        The full portfolio is an interactive macOS desktop experience with
+        folders, windows, a dock, the lot. It needs a bigger screen, so here's
+        the quick tour instead.
       </p>
 
       <ul className='flex flex-col gap-5'>
