@@ -81,7 +81,7 @@ const blogPosts = [
     id: 1,
     date: "May 30, 2026",
     title: "Real-Time Pitch Shifting in the Browser: How TransposeMe Works",
-    image: "/images/projects/transposeme.png",
+    image: "/images/projects/transposeme.webp",
     content: [
       "TransposeMe lets you paste a YouTube link or drop in an audio file, drag a slider, and hear the song in a different key instantly, with the tempo untouched. Here's what it actually takes to make that work in a browser.",
       "",
@@ -105,7 +105,7 @@ const blogPosts = [
     id: 2,
     date: "Apr 22, 2026",
     title: "Migrating a National Radio Station's CMS: Strapi v3 to v5, Live",
-    image: "/images/projects/bfm.png",
+    image: "/images/projects/bfm.webp",
     content: [
       "BFM 89.9 publishes around the clock, live radio, podcasts, articles. Its content backbone was Strapi v3, two major versions behind, EOL, and blocking every other infrastructure upgrade. I owned the migration to v5. The constraint that shaped everything: the newsroom never stops, so the CMS could not either.",
       "",
@@ -126,7 +126,7 @@ const blogPosts = [
     id: 3,
     date: "Mar 18, 2026",
     title: "Offline-First by Design: Building ChordVault as a PWA",
-    image: "/images/projects/chordvault.png",
+    image: "/images/projects/chordvault.webp",
     content: [
       "ChordVault is a chord sheet manager for musicians. Its defining requirement came from the stage, not the spec sheet: when you're mid-set and the venue Wi-Fi dies, your songs must still open. That single constraint drove the whole architecture.",
       "",
@@ -334,7 +334,7 @@ const WORK_LOCATION = {
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
-          imageUrl: "/images/projects/bfm.png",
+          imageUrl: "/images/projects/bfm.webp",
           position: "top-52 right-8",
         },
         {
@@ -397,7 +397,7 @@ const WORK_LOCATION = {
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
-          imageUrl: "/images/projects/managerpro.png",
+          imageUrl: "/images/projects/managerpro.webp",
           position: "top-36 left-6",
         },
         {
@@ -475,7 +475,7 @@ const WORK_LOCATION = {
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
-          imageUrl: "/images/projects/chordvault.png",
+          imageUrl: "/images/projects/chordvault.webp",
           position: "top-28 left-44",
         },
         {
@@ -553,7 +553,7 @@ const WORK_LOCATION = {
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
-          imageUrl: "/images/projects/transposeme.png",
+          imageUrl: "/images/projects/transposeme.webp",
           position: "top-40 left-36",
         },
         {
@@ -629,7 +629,7 @@ const WORK_LOCATION = {
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
-          imageUrl: "/images/projects/workout-tracker.png",
+          imageUrl: "/images/projects/workout-tracker.webp",
           position: "top-40 left-28",
         },
         {
@@ -700,7 +700,7 @@ const WORK_LOCATION = {
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
-          imageUrl: "/images/projects/caijin.png",
+          imageUrl: "/images/projects/caijin.webp",
           position: "top-32 right-10",
         },
         {
