@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Raw demo recordings (keep compressed .mp4 only)
+public/videos/*.mov

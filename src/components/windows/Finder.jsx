@@ -43,6 +43,7 @@ const Finder = () => {
 
     if (item.fileType === "txt") return openWindow("txtfile", item);
     if (item.fileType === "img") return openWindow("imgfile", item);
+    if (item.fileType === "video") return openWindow("videofile", item);
   };
   return (
     <>

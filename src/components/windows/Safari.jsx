@@ -1,6 +1,7 @@
 import { WindowControls } from "#components";
 import { blogPosts } from "#constants";
 import WindowWrapper from "#hoc/WindowWrapper";
+import useWindowStore from "#store/window";
 import {
   ChevronLeft,
   ChevronRight,
@@ -15,6 +16,20 @@ import {
 import React from "react";
 
 const Safari = () => {
+  const openWindow = useWindowStore((s) => s.openWindow);
+
+  const openPost = (post) => {
+    if (post.content) {
+      openWindow("txtfile", {
+        name: post.title,
+        subtitle: post.date,
+        description: post.content,
+      });
+    } else if (post.link) {
+      window.open(post.link, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <>
       <div
@@ -58,16 +73,27 @@ const Safari = () => {
           </div>
         ) : (
           <div className='space-y-8'>
-            {blogPosts.map(({ id, image, title, date, link }) => (
-              <div key={id} className='blog-post grid grid-cols-12 gap-5'>
+            {blogPosts.map((post) => (
+              <div key={post.id} className='blog-post grid grid-cols-12 gap-5'>
                 <div className='col-span-2'>
-                  <img src={image} alt={title} />
+                  <img src={post.image} alt={post.title} />
                 </div>
                 <div className='content col-span-10'>
-                  <p>{date}</p>
-                  <h3>{title}</h3>
-                  <a href={link} target='_blank' rel='noopener noreferrer'>
-                    Check out the full post <MoveRight className='icon-hover' />
+                  <p>{post.date}</p>
+                  <h3>{post.title}</h3>
+                  <a
+                    role='button'
+                    tabIndex={0}
+                    className='cursor-pointer'
+                    onClick={() => openPost(post)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        openPost(post);
+                      }
+                    }}
+                  >
+                    Read the full post <MoveRight className='icon-hover' />
                   </a>
                 </div>
               </div>

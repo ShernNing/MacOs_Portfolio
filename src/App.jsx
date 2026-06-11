@@ -4,10 +4,11 @@ import {
   Terminal,
   Text,
   Image,
+  Video,
   Contact,
   Photos,
 } from "#components/windows";
-import { Navbar, Welcome, Dock, Home } from "./components";
+import { Navbar, Welcome, Dock, Home, MobileHome } from "./components";
 import useWindowStore from "#store/window";
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
@@ -37,9 +38,11 @@ const App = () => {
       <Finder />
       <Text />
       <Image />
+      <Video />
       <Contact />
       <Photos />
       <Home />
+      <MobileHome />
     </main>
   );
 };

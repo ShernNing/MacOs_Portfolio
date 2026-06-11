@@ -277,7 +277,7 @@ body {
   }
 
   #photos {
-    @apply max-w-xl absolute top-120 left-1/2 -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-[42rem] max-w-[90vw] absolute top-120 left-[45%] -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
     .sidebar {
       @apply w-3/12 flex-none bg-gray-50 border-r border-gray-200 flex flex-col p-5;
@@ -309,7 +309,7 @@ body {
       @apply p-5;
 
       ul {
-        @apply grid grid-cols-5 grid-rows-5 gap-2.5;
+        @apply grid grid-cols-5 grid-rows-5 gap-2.5 h-96;
 
         li {
           img {
@@ -337,7 +337,7 @@ body {
   }
 
   #resume {
-    @apply w-fit h-fit absolute top-16 left-6/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-fit h-fit absolute top-16 left-[45%] bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
     #window-header {
       h2 {

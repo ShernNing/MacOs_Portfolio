@@ -89,7 +89,7 @@ const Resume = () => {
           Shern Ning Tan Resume.pdf
         </h2>
         <a
-          href='files/Shern Ning Tan Resume.pdf'
+          href='/files/Shern Ning Tan Resume.pdf'
           download
           className='cursor-pointer'
           title='Download resume'
@@ -111,7 +111,7 @@ const Resume = () => {
           <div className='text-red-600 font-semibold p-4'>{pdfError}</div>
         ) : (
           <Document
-            file='files/Shern Ning Tan Resume.pdf'
+            file='/files/Shern Ning Tan Resume.pdf'
             onLoadSuccess={onDocumentLoadSuccess}
             onLoadError={onDocumentError}
             loading={<div className='p-4'>Loading PDF...</div>}
