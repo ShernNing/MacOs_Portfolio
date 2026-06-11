@@ -2,11 +2,33 @@ import { navIcons, navLinks } from "#constants";
 import useWindowStore from "#store/window";
 import dayjs from "dayjs";
 import React from "react";
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
   const openWindow = useWindowStore((s) => s.openWindow);
 
   const [currentTime, setCurrentTime] = React.useState(dayjs());
+
+  const [isDark, setIsDark] = React.useState(
+    () =>
+      typeof document !== "undefined" &&
+      document.documentElement.classList.contains("dark"),
+  );
+
+  const toggleTheme = React.useCallback(() => {
+    setIsDark((prev) => !prev);
+  }, []);
+
+  // Keep <html> class + localStorage in sync. Idempotent, so StrictMode's
+  // double-invoke in dev is harmless (unlike side effects in the updater).
+  React.useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+    try {
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    } catch (e) {
+      /* localStorage unavailable - ignore */
+    }
+  }, [isDark]);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -69,11 +91,38 @@ const Navbar = () => {
 
       <div>
         <ul>
-          {navIcons.map(({ id, img }) => (
-            <li key={id}>
-              <img src={img} alt={`icon-${id}`} className='icon-hover' />
-            </li>
-          ))}
+          {navIcons.map(({ id, img }) => {
+            const isModeToggle = img === "/icons/mode.svg";
+            return (
+              <li key={id}>
+                {isModeToggle ? (
+                  <button
+                    type='button'
+                    onClick={toggleTheme}
+                    aria-label='Toggle dark mode'
+                    aria-pressed={isDark}
+                    data-tooltip-id='theme-tooltip'
+                    data-tooltip-content={
+                      isDark ? "Switch to light mode" : "Switch to dark mode"
+                    }
+                    data-tooltip-delay-show={150}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      background: "none",
+                      border: 0,
+                      padding: 0,
+                      cursor: "pointer",
+                    }}
+                  >
+                    <img src={img} alt='toggle theme' className='icon-hover' />
+                  </button>
+                ) : (
+                  <img src={img} alt={`icon-${id}`} className='icon-hover' />
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         <time
@@ -86,6 +135,8 @@ const Navbar = () => {
           {formattedTime}
         </time>
       </div>
+
+      <Tooltip id='theme-tooltip' place='bottom' className='tooltip' />
     </nav>
   );
 };

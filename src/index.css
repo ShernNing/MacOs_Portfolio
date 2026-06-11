@@ -85,28 +85,6 @@ body {
       @apply bg-white/20 backdrop-blur-md justify-between rounded-2xl p-1.5 flex items-end gap-1.5;
     }
 
-    .tooltip {
-      @apply !py-1 !px-3 !w-fit !text-center !text-xs !rounded-md !shadow-2xl;
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.55) 60%,
-        rgba(230, 240, 255, 0.35) 100%
-      );
-      color: #222;
-      backdrop-filter: blur(18px) saturate(180%);
-      -webkit-backdrop-filter: blur(18px) saturate(180%);
-      border: 1.5px solid rgba(255, 255, 255, 0.45);
-      box-shadow:
-        0 8px 32px 0 rgba(31, 38, 135, 0.12),
-        0 1.5px 4px 0 rgba(0, 0, 0, 0.08);
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      transition:
-        background 0.2s,
-        box-shadow 0.2s;
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.25);
-    }
-
     .dock-icon {
       @apply size-14 3xl:size-20 cursor-pointer;
 
@@ -114,6 +92,30 @@ body {
         @apply object-cover object-center;
       }
     }
+  }
+
+  /* Shared macOS tooltip (dock icons + navbar theme toggle) */
+  .tooltip {
+    @apply !py-1 !px-3 !w-fit !text-center !text-xs !rounded-md !shadow-2xl;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.55) 60%,
+      rgba(230, 240, 255, 0.35) 100%
+    );
+    color: #222;
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    box-shadow:
+      0 8px 32px 0 rgba(31, 38, 135, 0.12),
+      0 1.5px 4px 0 rgba(0, 0, 0, 0.08);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition:
+      background 0.2s,
+      box-shadow 0.2s;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.25);
+    z-index: 60;
   }
 
   #window-controls {
@@ -433,4 +435,162 @@ body {
       }
     }
   }
+}
+
+/* ===========================================================================
+   macOS Dark Mode
+   Activated when the menubar mode button (Navbar) adds `.dark` to <html>.
+   These rules are intentionally unlayered so they take precedence over the
+   Tailwind @layer base / @layer components defaults above.
+   =========================================================================== */
+
+/* Menubar */
+.dark nav {
+  background-color: rgba(28, 28, 30, 0.55);
+  color: #f5f5f7;
+}
+.dark nav img {
+  /* Flip the dark monochrome logo + icons to light */
+  filter: invert(1);
+}
+.dark nav time {
+  color: #f5f5f7;
+}
+
+/* Dock */
+.dark #dock .dock-container {
+  background-color: rgba(0, 0, 0, 0.28);
+}
+.dark .tooltip {
+  background: linear-gradient(
+    135deg,
+    rgba(60, 60, 64, 0.85) 60%,
+    rgba(40, 44, 54, 0.75) 100%
+  );
+  color: #f5f5f7;
+  border-color: rgba(255, 255, 255, 0.12);
+  text-shadow: none;
+}
+
+/* Window surfaces */
+.dark #safari,
+.dark #terminal,
+.dark #contact,
+.dark #photos,
+.dark #resume,
+.dark #finder,
+.dark #txtfile,
+.dark #imgfile {
+  background-color: #1e1e1e;
+  color: #f5f5f7;
+}
+
+/* Inner content panels that use bg-white in JSX */
+.dark .bg-white {
+  background-color: #1e1e1e;
+}
+
+/* Window header / chrome */
+.dark .window-header,
+.dark #window-header {
+  background-color: #2c2c2e;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #aeaeb2;
+}
+.dark #imgfile .window-header p {
+  color: #d1d1d6;
+}
+
+/* Sidebars (Finder, Photos) */
+.dark #finder .sidebar,
+.dark #photos .sidebar {
+  background-color: #2c2c2e;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.dark #finder .sidebar h3,
+.dark #photos .sidebar h2 {
+  color: #8e8e93;
+}
+.dark #finder .content {
+  background-color: #1e1e1e;
+}
+.dark #finder .sidebar ul .not-active {
+  color: #e5e5ea;
+}
+.dark #finder .sidebar ul .not-active:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.dark #finder .sidebar ul .active,
+.dark #photos .sidebar ul li:first-child {
+  background-color: rgba(10, 132, 255, 0.32);
+  color: #ffffff;
+}
+/* The github-dark logo is invisible on dark surfaces - flip it to light */
+.dark #finder img[src$="github-dark.svg"] {
+  filter: invert(1);
+}
+
+/* Safari (Articles) */
+.dark #safari .search {
+  background-color: #1c1c1e;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.dark #safari .search input::placeholder {
+  color: #8e8e93;
+}
+.dark #safari .blog {
+  background-color: #1e1e1e;
+}
+.dark #safari .blog .content p {
+  color: #aeaeb2;
+}
+.dark #safari .blog .content h3 {
+  color: #f2f2f7;
+}
+
+/* Terminal (Skills) footnote flag icon */
+.dark #terminal svg[fill="black"] {
+  fill: #f5f5f7;
+}
+
+/* Image preview backdrop */
+.dark #imgfile .preview {
+  background-color: #2c2c2e;
+}
+
+/* Hover affordance for header/toolbar icons */
+.dark .icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Catch-all overrides for Tailwind utilities used directly in JSX */
+.dark .text-black {
+  color: #f5f5f7;
+}
+.dark .text-gray-800 {
+  color: #e5e5ea;
+}
+.dark .text-gray-700 {
+  color: #e5e5ea;
+}
+.dark .text-gray-600 {
+  color: #c7c7cc;
+}
+.dark .text-gray-500 {
+  color: #aeaeb2;
+}
+.dark .text-gray-400 {
+  color: #8e8e93;
+}
+.dark .border-gray-200 {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.dark .border-gray-300 {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.dark .bg-gray-50 {
+  background-color: #2c2c2e;
+}
+.dark .bg-gray-200 {
+  background-color: #3a3a3c;
 }

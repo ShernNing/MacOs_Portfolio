@@ -290,7 +290,7 @@ const WORK_LOCATION = {
       name: "BFM 89.9",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-10 left-10",
+      position: "top-8 left-4",
       windowPosition: "top-[10vh] right-10",
       children: [
         {
@@ -358,7 +358,7 @@ const WORK_LOCATION = {
       name: "ManagerPro",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-10 left-60",
+      position: "top-8 left-52",
       windowPosition: "top-[28vh] right-10",
       children: [
         {
@@ -435,7 +435,7 @@ const WORK_LOCATION = {
       name: "ChordVault",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-10 right-20",
+      position: "top-8 right-4",
       windowPosition: "top-[46vh] right-10",
       children: [
         {
@@ -514,7 +514,7 @@ const WORK_LOCATION = {
       name: "TransposeMe",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-48 left-10",
+      position: "top-48 left-4",
       windowPosition: "top-[10vh] right-64",
       children: [
         {
@@ -592,7 +592,7 @@ const WORK_LOCATION = {
       name: "Workout Tracker",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-48 left-60",
+      position: "top-48 left-52",
       windowPosition: "top-[28vh] right-64",
       children: [
         {
@@ -669,7 +669,7 @@ const WORK_LOCATION = {
       name: "Caijin 财今",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-48 right-20",
+      position: "top-48 right-4",
       windowPosition: "top-[46vh] right-64",
       children: [
         {

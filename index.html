@@ -5,6 +5,16 @@
     <link rel="icon" type="image/png" href="/macbook.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shern Ning's Portfolio</title>
+    <script>
+      // Apply saved theme before paint to avoid a flash. Defaults to light.
+      (function () {
+        try {
+          if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
     <meta
       name="description"
       content="Shern Ning Tan - Front-End Developer specializing in React and Next.js. An interactive macOS-style portfolio: browse projects, resume, and more."
