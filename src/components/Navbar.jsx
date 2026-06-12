@@ -15,8 +15,43 @@ const Navbar = () => {
       document.documentElement.classList.contains("dark"),
   );
 
+  // Onboarding hint pointing at the theme toggle: null | "visible" | "hiding".
+  const [themeHint, setThemeHint] = React.useState(null);
+
   const toggleTheme = React.useCallback(() => {
     setIsDark((prev) => !prev);
+    setThemeHint(null);
+  }, []);
+
+  // Pop the hint a few seconds after load, hold it, then fade it out. Shows
+  // once per browser so it nudges new visitors without nagging returning ones.
+  React.useEffect(() => {
+    try {
+      if (localStorage.getItem("themeHintSeen")) return;
+    } catch (e) {
+      /* localStorage unavailable - ignore */
+    }
+
+    let hideT;
+    let removeT;
+    const showT = setTimeout(() => {
+      setThemeHint("visible");
+      try {
+        localStorage.setItem("themeHintSeen", "1");
+      } catch (e) {
+        /* localStorage unavailable - ignore */
+      }
+      hideT = setTimeout(() => {
+        setThemeHint("hiding");
+        removeT = setTimeout(() => setThemeHint(null), 400);
+      }, 6000);
+    }, 2500);
+
+    return () => {
+      clearTimeout(showT);
+      clearTimeout(hideT);
+      clearTimeout(removeT);
+    };
   }, []);
 
   // Keep <html> class + localStorage in sync. Idempotent, so StrictMode's
@@ -94,29 +129,49 @@ const Navbar = () => {
           {navIcons.map(({ id, img }) => {
             const isModeToggle = img === "/icons/mode.svg";
             return (
-              <li key={id}>
+              <li
+                key={id}
+                style={isModeToggle ? { position: "relative" } : undefined}
+              >
                 {isModeToggle ? (
-                  <button
-                    type='button'
-                    onClick={toggleTheme}
-                    aria-label='Toggle dark mode'
-                    aria-pressed={isDark}
-                    data-tooltip-id='theme-tooltip'
-                    data-tooltip-content={
-                      isDark ? "Switch to light mode" : "Switch to dark mode"
-                    }
-                    data-tooltip-delay-show={150}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      background: "none",
-                      border: 0,
-                      padding: 0,
-                      cursor: "pointer",
-                    }}
-                  >
-                    <img src={img} alt='toggle theme' className='icon-hover' />
-                  </button>
+                  <>
+                    <button
+                      type='button'
+                      onClick={toggleTheme}
+                      aria-label='Toggle dark mode'
+                      aria-pressed={isDark}
+                      data-tooltip-id='theme-tooltip'
+                      data-tooltip-content={
+                        isDark ? "Switch to light mode" : "Switch to dark mode"
+                      }
+                      data-tooltip-delay-show={150}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        background: "none",
+                        border: 0,
+                        padding: 0,
+                        cursor: "pointer",
+                      }}
+                    >
+                      <img
+                        src={img}
+                        alt='toggle theme'
+                        className='icon-hover'
+                      />
+                    </button>
+                    {themeHint && (
+                      <div
+                        className={`theme-hint${
+                          themeHint === "hiding" ? " theme-hint--hiding" : ""
+                        }`}
+                        role='status'
+                        onClick={() => setThemeHint(null)}
+                      >
+                        Try dark mode 🌙
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <img src={img} alt={`icon-${id}`} className='icon-hover' />
                 )}

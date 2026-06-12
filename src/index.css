@@ -118,6 +118,73 @@ body {
     z-index: 60;
   }
 
+  /* Onboarding hint that points at the navbar theme toggle */
+  .theme-hint {
+    @apply absolute py-1.5 px-3 text-xs rounded-md shadow-2xl cursor-pointer;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 70;
+    white-space: nowrap;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.6) 60%,
+      rgba(230, 240, 255, 0.4) 100%
+    );
+    color: #222;
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    box-shadow:
+      0 8px 32px 0 rgba(31, 38, 135, 0.18),
+      0 1.5px 4px 0 rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.25);
+    opacity: 1;
+    animation: themeHintIn 0.35s ease-out;
+  }
+
+  .theme-hint::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.5);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .theme-hint--hiding {
+    animation: themeHintOut 0.35s ease-in forwards;
+    pointer-events: none;
+  }
+
+  @keyframes themeHintIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  @keyframes themeHintOut {
+    from {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-6px);
+    }
+  }
+
   #window-controls {
     @apply flex gap-2;
 
@@ -508,6 +575,20 @@ body {
   color: #f5f5f7;
   border-color: rgba(255, 255, 255, 0.12);
   text-shadow: none;
+}
+.dark .theme-hint {
+  background: linear-gradient(
+    135deg,
+    rgba(60, 60, 64, 0.9) 60%,
+    rgba(40, 44, 54, 0.8) 100%
+  );
+  color: #f5f5f7;
+  border-color: rgba(255, 255, 255, 0.14);
+  text-shadow: none;
+}
+.dark .theme-hint::before {
+  background: rgba(60, 60, 64, 0.9);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
 /* Window surfaces */
