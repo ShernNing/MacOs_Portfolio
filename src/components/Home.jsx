@@ -169,7 +169,7 @@ const Home = () => {
             style={{ zIndex: 1 }}
           >
             <img src='/images/txt.png' alt='About Me' />
-            <p className='pl-6'>About Me</p>
+            <p>About Me</p>
           </li>
         )}
 

@@ -161,7 +161,7 @@ body {
   }
 
   #safari {
-    @apply w-4xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-4xl absolute top-14 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
     .search {
       @apply flex items-center gap-3 w-2/3 bg-white border border-gray-300 rounded-lg px-3 py-2;
@@ -172,7 +172,8 @@ body {
     }
 
     .blog {
-      @apply bg-white p-10 max-w-3xl mx-auto;
+      @apply bg-white p-10 max-w-3xl mx-auto overflow-y-auto;
+      max-height: calc(100vh - 180px);
 
       h2 {
         @apply text-xl font-bold text-pink-600 mb-10;
@@ -198,6 +199,43 @@ body {
 
           a {
             @apply text-blue-600 text-xs hover:underline flex items-center gap-3;
+          }
+        }
+      }
+
+      .article {
+        @apply max-w-2xl mx-auto;
+
+        .article-back {
+          @apply inline-flex items-center gap-1 text-xs text-blue-600 hover:underline mb-6 cursor-pointer;
+        }
+
+        .article-date {
+          @apply text-xs uppercase tracking-wide text-gray-400 mb-2;
+        }
+
+        .article-title {
+          @apply text-3xl font-bold leading-tight text-gray-900 mb-6;
+        }
+
+        .article-hero {
+          @apply w-full rounded-xl object-cover mb-8;
+          max-height: 320px;
+        }
+
+        .article-content {
+          @apply space-y-4;
+
+          .article-heading {
+            @apply text-lg font-semibold text-gray-900 mt-8 mb-1;
+          }
+
+          .article-para {
+            @apply text-base leading-relaxed text-gray-700;
+          }
+
+          .article-list {
+            @apply list-disc ps-6 space-y-2 text-base leading-relaxed text-gray-700;
           }
         }
       }
@@ -547,6 +585,17 @@ body {
 .dark #safari .blog .content h3 {
   color: #f2f2f7;
 }
+.dark #safari .article .article-title,
+.dark #safari .article .article-content .article-heading {
+  color: #f2f2f7;
+}
+.dark #safari .article .article-content .article-para,
+.dark #safari .article .article-content .article-list {
+  color: #c7c7cc;
+}
+.dark #safari .article .article-date {
+  color: #8e8e93;
+}
 
 /* Terminal (Skills) footnote flag icon */
 .dark #terminal svg[fill="black"] {
@@ -593,4 +642,157 @@ body {
 }
 .dark .bg-gray-200 {
   background-color: #3a3a3c;
+}
+
+/* ===========================================================================
+   .txt document styling
+   Plain string arrays are classified in Text.jsx into lead / section / label /
+   bullet / paragraph / divider and themed here for a real-document feel.
+   =========================================================================== */
+
+#txtfile {
+  --txt-accent: #0071e3;
+  --txt-ink: #1d1d1f;
+  --txt-body: #3c3c43;
+  --txt-muted: #6e6e73;
+  --txt-rule: rgba(0, 0, 0, 0.08);
+}
+
+.txt-doc {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hero (About Me: photo + subtitle) */
+.txt-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 2rem 1.5rem 1.25rem;
+  background: linear-gradient(180deg, rgba(0, 113, 227, 0.06), transparent);
+}
+.txt-hero-img {
+  width: 168px;
+  height: 168px;
+  object-fit: cover;
+  border-radius: 1.25rem;
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+.txt-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt-accent);
+  text-align: center;
+}
+
+/* Document body */
+.txt-content {
+  padding: 1.25rem 1.75rem 2rem;
+  max-width: 46rem;
+  margin: 0 auto;
+  color: var(--txt-body);
+  font-size: 0.975rem;
+  line-height: 1.65;
+}
+
+/* Headline */
+.txt-lead {
+  margin-bottom: 1.4rem;
+}
+.txt-lead-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--txt-ink);
+}
+.txt-lead-role {
+  margin-top: 0.35rem;
+  font-size: 1.02rem;
+  font-weight: 500;
+  color: var(--txt-muted);
+}
+
+/* Section header: "── NAVBAR ──" */
+.txt-section {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 2rem 0 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--txt-rule);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--txt-accent);
+}
+.txt-section-bar {
+  width: 3px;
+  height: 0.95rem;
+  border-radius: 999px;
+  background: var(--txt-accent);
+}
+.txt-content > .txt-section:first-child {
+  margin-top: 0;
+}
+
+/* Inline subheading: "Professional Summary:" */
+.txt-label {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--txt-ink);
+}
+
+/* Paragraphs */
+.txt-para {
+  margin: 0.7rem 0;
+}
+.txt-bullet-lead {
+  color: var(--txt-ink);
+}
+
+/* Bullet lists */
+.txt-bullets {
+  margin: 0.6rem 0 0.9rem;
+  list-style: none;
+  padding: 0;
+}
+.txt-bullet-dot {
+  flex: none;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: var(--txt-accent);
+}
+
+/* Decorative full-width divider */
+.txt-divider {
+  width: 100%;
+  margin: 1.1rem 0;
+  border: 0;
+  border-top: 1px solid var(--txt-rule);
+}
+
+/* Dark mode */
+.dark #txtfile {
+  --txt-accent: #0a84ff;
+  --txt-ink: #f5f5f7;
+  --txt-body: #c7c7cc;
+  --txt-muted: #98989d;
+  --txt-rule: rgba(255, 255, 255, 0.12);
+}
+.dark .txt-hero {
+  background: linear-gradient(180deg, rgba(10, 132, 255, 0.1), transparent);
+}
+.dark .txt-hero-img {
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
 }
